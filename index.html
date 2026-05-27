@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORBITAL-88 // Retro Computer Sci-Fi VHS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="tracking" aria-hidden="true"></div>
+
+    <main class="shell">
+        <div class="frame">
+            <header class="topbar">
+                <a class="brand" href="#top">ORBITAL-88</a>
+                <nav class="nav" aria-label="Rendszer navigáció">
+                    <a href="#signal">Signal</a>
+                    <a href="#telemetry">Telemetry</a>
+                    <a href="#systems">Systems</a>
+                    <a href="#archive">Archive</a>
+                </nav>
+                <div class="timecode" id="timecode">TCR 00:00:00:00</div>
+            </header>
+
+            <section class="hero" id="top" aria-labelledby="title">
+                <div class="main-screen" id="signal">
+                    <div class="orbit" aria-hidden="true"></div>
+                    <div class="orbit" aria-hidden="true"></div>
+                    <div class="orbit" aria-hidden="true"></div>
+                    <div class="crosshair" aria-hidden="true"></div>
+                    <div class="hero-copy" id="incoming-panel">
+                        <p class="kicker" id="hero-kicker">Incoming transmission / DONGO PC uplink</p>
+                        <h1 id="title" data-text="DONGO PC SIGNAL">DONGO PC SIGNAL</h1>
+                        <p class="subtitle" id="hero-subtitle">
+                            Kék neon karakterfény, narancs rendszerfeliratok, hibás szalagkövetés,
+                            hideg terminálpanelek és egy régi űrállomás monitorának ideges vibrálása.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="side-stack" id="telemetry">
+                    <aside class="panel">
+                        <div class="panel-title">
+                            <span>Telemetry</span>
+                            <span>Lock 88%</span>
+                        </div>
+                        <div class="panel-body readouts">
+                            <div class="readout">
+                                <span>Signal</span>
+                                <strong>49.7</strong>
+                            </div>
+                            <div class="readout">
+                                <span>Noise</span>
+                                <strong>12DB</strong>
+                            </div>
+                            <div class="readout">
+                                <span>Phase</span>
+                                <strong>03A</strong>
+                            </div>
+                            <div class="readout">
+                                <span>Deck</span>
+                                <strong>VHS</strong>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <aside class="panel terminal">
+                        <div class="panel-title">
+                            <span>Client console</span>
+                            <span id="console-status">SCANNING</span>
+                        </div>
+                        <div class="panel-body console-readout" id="client-console" aria-live="polite">
+                            <p class="cursor-block">> reading client environment </p>
+                        </div>
+                    </aside>
+
+                    <div class="actions">
+                        <a class="command" href="#archive">Open Archive</a>
+                        <a class="command" href="#signal">Re-Scan</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ticker" aria-label="VHS futószalag">
+                <div class="ticker-track">
+                    <span>Tracking Error 04</span>
+                    <span>Blue Phosphor Active</span>
+                    <span>Chroma Drift</span>
+                    <span>Signal Lost / Signal Found</span>
+                    <span>Analog Memory</span>
+                    <span>Tracking Error 04</span>
+                    <span>Blue Phosphor Active</span>
+                    <span>Chroma Drift</span>
+                    <span>Signal Lost / Signal Found</span>
+                    <span>Analog Memory</span>
+                </div>
+            </section>
+
+            <section class="systems" id="systems" aria-label="Rendszer eszközök">
+                <article class="panel performance-panel">
+                    <div class="panel-title">
+                        <span>Performance monitor</span>
+                        <span id="perf-status">LIVE</span>
+                    </div>
+                    <div class="panel-body metric-grid">
+                        <div class="metric">
+                            <span>FPS</span>
+                            <strong id="fps-output">--</strong>
+                        </div>
+                        <div class="metric">
+                            <span>Frame</span>
+                            <strong id="frame-output">0</strong>
+                        </div>
+                        <div class="metric">
+                            <span>Runtime</span>
+                            <strong id="runtime-output">00:00</strong>
+                        </div>
+                        <div class="metric">
+                            <span>Memory</span>
+                            <strong id="memory-output">N/A</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel controls-panel">
+                    <div class="panel-title">
+                        <span>Signal controls</span>
+                        <span id="control-status">MANUAL</span>
+                    </div>
+                    <div class="panel-body control-stack">
+                        <label class="control">
+                            <span>Scanlines</span>
+                            <input id="scanline-control" type="range" min="0" max="100" value="44">
+                        </label>
+                        <label class="control">
+                            <span>Neon</span>
+                            <input id="neon-control" type="range" min="40" max="160" value="100">
+                        </label>
+                        <label class="control">
+                            <span>Star speed</span>
+                            <input id="speed-control" type="range" min="30" max="180" value="100">
+                        </label>
+                        <button class="command control-reset" id="reset-controls" type="button">Reset</button>
+                    </div>
+                </article>
+
+                <article class="panel command-panel">
+                    <div class="panel-title">
+                        <span>Command input</span>
+                        <span id="command-status">READY</span>
+                    </div>
+                    <div class="panel-body command-console">
+                        <div class="command-log" id="command-log" aria-live="polite"></div>
+                        <form class="command-form" id="command-form">
+                            <span>&gt;</span>
+                            <input id="command-input" type="text" autocomplete="off" spellcheck="false" aria-label="Command input">
+                            <button class="command" type="submit">Run</button>
+                        </form>
+                    </div>
+                </article>
+            </section>
+
+            <section class="cards" id="archive" aria-label="Design modulok">
+                <article class="card">
+                    <small>Module 01</small>
+                    <h2>CRT Glow</h2>
+                    <p>Foszforeszkáló kék betűk és erős árnyfény, mintha túlvezérelt régi monitoron futna.</p>
+                </article>
+                <article class="card">
+                    <small>Module 02</small>
+                    <h2>VHS Damage</h2>
+                    <p>Scanline, tracking csík, kromatikus elcsúszás és rövid, hibás képkocka-szerű rángások.</p>
+                </article>
+                <article class="card">
+                    <small>Module 03</small>
+                    <h2>Command UI</h2>
+                    <p>Narancs parancsjelzések, telemetria panelek és hideg sci-fi műszerfal szerkezet.</p>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
