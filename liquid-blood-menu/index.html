@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vércsepp menü</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="demo-stage" aria-label="Vércsepp menü demo">
+      <svg id="menuSvg" class="blood-menu" aria-hidden="true">
+        <defs>
+          <filter id="bloodGoo" x="-25%" y="-25%" width="150%" height="170%" color-interpolation-filters="sRGB">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 20 -8"
+              result="goo"
+            />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+        </defs>
+
+        <g id="bloodLayer" class="blood-layer">
+          <path id="dropShape" class="blood-shape blood-drop" />
+          <path id="bridgeShape" class="blood-shape blood-bridge" />
+
+          <g id="itemsGroup">
+            <g class="menu-item" data-index="0">
+              <path class="blood-shape item-shape" />
+              <text class="item-label">Élet</text>
+            </g>
+            <g class="menu-item" data-index="1">
+              <path class="blood-shape item-shape" />
+              <text class="item-label">Remény</text>
+            </g>
+            <g class="menu-item" data-index="2">
+              <path class="blood-shape item-shape" />
+              <text class="item-label">Erő</text>
+            </g>
+            <g class="menu-item" data-index="3">
+              <path class="blood-shape item-shape" />
+              <text class="item-label">Segítség</text>
+            </g>
+          </g>
+
+          <path id="buttonShape" class="blood-shape main-shape" />
+        </g>
+        <text id="buttonText" class="button-label">Adj vért</text>
+      </svg>
+
+      <button id="hitButton" class="hit-button" type="button" aria-label="Vércsepp menü nyitása">Adj vért</button>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
